@@ -46,8 +46,18 @@ pipeline {
           """
         }
       }
+     }
+        stage('Deploy (Staging)') {
+      steps {
+        bat """
+          docker compose pull
+          docker compose up -d
+          docker ps
+        """
+      }
     }
-  }
+    }
+  
 
   post {
     success { echo 'Build+Test+Push OK' }
